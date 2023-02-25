@@ -18,7 +18,8 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	RenderWindow window(VideoMode(HORIZONTAL_CELLS * SQUARE_CELL_SIZE, VERTICAL_CELLS * SQUARE_CELL_SIZE), "Maze!");
+	RenderWindow window(VideoMode(HORIZONTAL_CELLS * SQUARE_TILE_SIZE + SQUARE_TILE_SIZE,
+		VERTICAL_CELLS * SQUARE_TILE_SIZE + SQUARE_TILE_SIZE), "Maze!");
 
 	std::string outputprefix = "maze";
 
