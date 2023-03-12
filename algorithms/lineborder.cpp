@@ -11,7 +11,7 @@ LineBorder::LineBorder(std::tuple<double, double, double, double> xy)
 	std::tie(_x1, _y1, _x2, _y2) = xy;
 }
 
-std::string LineBorder::SVGPrintString(const std::string& color) const
+std::string LineBorder::SVGPrint(const std::string& color) const
 {
 	return "<line x1=\"" + std::to_string(_x1 * SQUARE_TILE_SIZE) + "\" x2=\"" +
 		std::to_string(_x2 * SQUARE_TILE_SIZE) + "\" y1=\"" + std::to_string(_y1 * SQUARE_TILE_SIZE) +

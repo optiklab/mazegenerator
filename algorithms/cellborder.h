@@ -11,7 +11,7 @@ using namespace sf;
 class CellBorder
 {
 public:
-	virtual std::string SVGPrintString(const std::string& color) const = 0;
+	virtual std::string SVGPrint(const std::string& color) const = 0;
 
 	virtual void Draw(sf::RenderWindow& window, Color& color) const = 0;
 };

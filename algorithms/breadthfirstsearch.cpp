@@ -1,12 +1,17 @@
 #include "breadthfirstsearch.h"
 #include <algorithm>
-#include <iostream>
 
-std::vector<std::pair<int, int>> BreadthFirstSearch::SpanningTree(int vertices, const Graph& adjacencylist)
+/**
+ * \brief Generates entire maze spanning tree by randomly selecting next cell and moving using DFS.
+ * \param verticesNumber Number of vertices in the graph or cells in the maze.
+ * \param adjacencylist Graph representation
+ * \return A list of pairs of connected maze cells (without walls).
+ */
+std::vector<std::pair<int, int>> BreadthFirstSearch::SpanningTree(int verticesNumber, const Graph& adjacencylist)
 {
-	visited = std::vector<bool>(vertices, false);
+	visited = std::vector<bool>(verticesNumber, false);
 
-	int startvertex = std::uniform_int_distribution<int>(0, vertices - 1)(_generator);
+	int startvertex = std::uniform_int_distribution<int>(0, verticesNumber - 1)(_generator);
 	currentlevel.push_back(startvertex);
 	visited[startvertex] = true;
 

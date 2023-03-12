@@ -5,49 +5,67 @@
 #include "lineborder.h"
 #include "mazebase.h"
 
-MazeBase::MazeBase(int verticesNumber, int startvertex, int endvertex)
-	: _verticesNumber(verticesNumber), _startvertex(startvertex), _endvertex(endvertex)
+MazeBase::MazeBase(int verticesNumber, int startVertex, int endVertex)
+	: _verticesNumber(verticesNumber), _startVertex(startVertex), _endVertex(endVertex)
 {
 	
 }
 
+/**
+ * \brief Creates a Graph to represent the maze. Basically, it creates a grid with all-closed cells for the future maze.
+ * \param window to draw results.
+ * \param color to draw.
+ */
 void MazeBase::InitialiseGraph()
 {
-	_adjacencylist.clear();
-	_adjacencylist.resize(_verticesNumber);
+	_adjacencyList.clear();
+	_adjacencyList.resize(_verticesNumber);
 }
 
+/**
+ * \brief Generates entire maze spanning tree and adjusts maze graph representation accordingly.
+ * \param algorithm Algorithm that is used to generate ,aze spanning tree.
+ */
 void MazeBase::GenerateMaze(SpanningtreeAlgorithmBase* algorithm)
 {
-	auto spanningTreeEdges = algorithm->SpanningTree(_verticesNumber, _adjacencylist);
+	auto spanningTreeEdges = algorithm->SpanningTree(_verticesNumber, _adjacencyList);
+
+	// Optionally, find find a solution of a maze based on Graph DFS.
 	_Solve(spanningTreeEdges);
 	_RemoveBorders(spanningTreeEdges);
 }
 
+/**
+ * \brief Optional method to find a solution of a maze based on Graph DFS. It's not actually change anything in the maze itself.
+ * \param spanningTreeEdges List of vertex pairs that represent the connected cells of a maze.
+ */
 void MazeBase::_Solve(const std::vector<std::pair<int, int>>& spanningTreeEdges)
 {
+	// Convert pairs of vertex numbers into actual edges, to run DFS on it.
 	Graph spanningTreeGraph(_verticesNumber);
 	for (const auto& [u, v] : spanningTreeEdges)
 	{
 		spanningTreeGraph[u].push_back(
-			*std::find_if(_adjacencylist[u].begin(), _adjacencylist[u].end(),
+			*std::find_if(_adjacencyList[u].begin(), _adjacencyList[u].end(),
 				[v = v](const Edge& e)
 				{
 					return std::get<0>(e) == v;
 				}));
 		spanningTreeGraph[v].push_back(
-			*std::find_if(_adjacencylist[v].begin(), _adjacencylist[v].end(),
+			*std::find_if(_adjacencyList[v].begin(), _adjacencyList[v].end(),
 				[u = u](const Edge& e)
 				{
 					return std::get<0>(e) == u;
 				}));
 	}
 
+	// Find path from ENTRY point of a maze to the EXIT point.
 	DepthFirstSearch dfs;
-	auto parent = dfs.Solve(_verticesNumber, spanningTreeGraph, _startvertex);
+	auto parent = dfs.Solve(_verticesNumber, spanningTreeGraph, _startVertex);
 
+	// Covert list of vertex numbers (path) back into Solution Graph (edges list).
 	_solution = Graph(_verticesNumber);
-	for (int u = _endvertex; parent[u] != u; u = parent[u])
+	for (int u = _endVertex; parent[u] != u; u = parent[u])
 	{
 		_solution[u].push_back(*std::find_if(
 			spanningTreeGraph[u].begin(), spanningTreeGraph[u].end(),
@@ -58,18 +76,22 @@ void MazeBase::_Solve(const std::vector<std::pair<int, int>>& spanningTreeEdges)
 	}
 }
 
+/**
+ * \brief Based on maze spanning tree adjusts maze graph by removing unnecessary walls between connected cells.
+ * \param spanningTreeEdges Spanning tree of a maze
+ */
 void MazeBase::_RemoveBorders(const std::vector<std::pair<int, int>>& spanningTreeEdges)
 {
 	for (const auto& [u, v] : spanningTreeEdges)
 	{
-		_adjacencylist[u].erase(
-			std::find_if(_adjacencylist[u].begin(), _adjacencylist[u].end(),
+		_adjacencyList[u].erase(
+			std::find_if(_adjacencyList[u].begin(), _adjacencyList[u].end(),
 				[v = v](const Edge& e)
 				{
 					return std::get<0>(e) == v;
 				}));
-		_adjacencylist[v].erase(
-			std::find_if(_adjacencylist[v].begin(), _adjacencylist[v].end(),
+		_adjacencyList[v].erase(
+			std::find_if(_adjacencyList[v].begin(), _adjacencyList[v].end(),
 				[u = u](const Edge& e)
 				{
 					return std::get<0>(e) == u;
@@ -82,11 +104,13 @@ void MazeBase::Draw(RenderWindow& window, Color& color) const
 {
 	for (int i = 0; i < _verticesNumber; ++i)
 	{
-		for (const auto& edge : _adjacencylist[i])
+		for (const auto& edge : _adjacencyList[i])
 		{
 			std::get<1>(edge)->Draw(window, color);
 		}
 	}
+
+	// TODO Draw a solution Graph as well.
 }
 
 void MazeBase::PrintMazeSVG(const std::string& filename) const
@@ -113,11 +137,11 @@ void MazeBase::PrintMazeSVG(const std::string& filename) const
 
 	for (int i = 0; i < _verticesNumber; ++i)
 	{
-		for (const auto& edge : _adjacencylist[i])
+		for (const auto& edge : _adjacencyList[i])
 		{
 			if (std::get<0>(edge) < i)
 			{
-				svgfile << std::get<1>(edge)->SVGPrintString("black") << "\n";
+				svgfile << std::get<1>(edge)->SVGPrint("black") << "\n";
 			}
 		}
 	}

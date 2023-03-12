@@ -2,16 +2,22 @@
 #include <algorithm>
 #include <numeric>
 
-std::vector<std::pair<int, int>> LoopErasedRandomWalk::SpanningTree(int vertices, const Graph& adjacencylist)
+/**
+ * \brief Generates entire maze spanning tree by randomly selecting next cell and moving using DFS.
+ * \param verticesNumber Number of vertices in the graph or cells in the maze.
+ * \param adjacencylist Graph representation
+ * \return A list of pairs of connected maze cells (without walls).
+ */
+std::vector<std::pair<int, int>> LoopErasedRandomWalk::SpanningTree(int verticesNumber, const Graph& adjacencylist)
 {
 	_spanningTree.clear();
-	_visited = std::vector<int>(vertices, 0);
+	_visited = std::vector<int>(verticesNumber, 0);
 
-	std::vector<int> nodes(vertices);
+	std::vector<int> nodes(verticesNumber);
 	std::iota(nodes.begin(), nodes.end(), 0);
 	shuffle(nodes.begin(), nodes.end(), _generator);
 	_visited[nodes[0]] = 1;
-	for (int round = 1, i = 1; i < vertices; ++i)
+	for (int round = 1, i = 1; i < verticesNumber; ++i)
 	{
 		if (_visited[nodes[i]]) continue;
 		++round;
