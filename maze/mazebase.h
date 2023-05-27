@@ -51,7 +51,7 @@ protected:
 	// Maze is graph-based, because:
 	// - Solving a maze is equivalent to finding a path in a graph
 	// - We can use different ways of visualization while still use same base graph structure
-	Graph _adjacencyList;
+	Graph _edgesList;
 	Graph _solution;
 
 	int _verticesNumber;

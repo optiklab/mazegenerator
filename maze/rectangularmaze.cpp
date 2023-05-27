@@ -32,9 +32,9 @@ void RectangularMaze::InitialiseGraph()
 	// Lower and upper boundaries of a maze
 	for (int i = 0; i < _width; ++i)
 	{
-		_adjacencyList[_VertexIndex(0, i)].push_back(
+		_edgesList[_VertexIndex(0, i)].push_back(
 			{ -1, std::make_shared<LineBorder>(i, 0, i + 1, 0) });
-		_adjacencyList[_VertexIndex(_height - 1, i)].push_back(
+		_edgesList[_VertexIndex(_height - 1, i)].push_back(
 			{ -1, std::make_shared<LineBorder>(i, _height, i + 1, _height) });
 	}
 
@@ -43,11 +43,11 @@ void RectangularMaze::InitialiseGraph()
 	for (int i = 0; i < _height; ++i)
 	{
 		if (i != 0)
-			_adjacencyList[_VertexIndex(i, 0)].push_back(
+			_edgesList[_VertexIndex(i, 0)].push_back(
 				{ -1, std::make_shared<LineBorder>(0, i, 0, i + 1) });
 
 		if (i != _height - 1)
-			_adjacencyList[_VertexIndex(i, 0)].push_back(
+			_edgesList[_VertexIndex(i, 0)].push_back(
 				{ -1, std::make_shared<LineBorder>(_width, i, _width, i + 1) });
 	}
 
@@ -58,8 +58,8 @@ void RectangularMaze::InitialiseGraph()
 		for (int j = 0; j < _width - 1; ++j)
 		{
 			std::shared_ptr<LineBorder> ptr = std::make_shared<LineBorder>(j + 1, i, j + 1, i + 1);
-			_adjacencyList[_VertexIndex(i, j)].push_back({ _VertexIndex(i, j + 1), ptr });
-			_adjacencyList[_VertexIndex(i, j + 1)].push_back({ _VertexIndex(i, j), ptr });
+			_edgesList[_VertexIndex(i, j)].push_back({ _VertexIndex(i, j + 1), ptr });
+			_edgesList[_VertexIndex(i, j + 1)].push_back({ _VertexIndex(i, j), ptr });
 		}
 	}
 
@@ -70,8 +70,8 @@ void RectangularMaze::InitialiseGraph()
 		for (int j = 0; j < _width; ++j)
 		{
 			std::shared_ptr<LineBorder> ptr = std::make_shared<LineBorder>(j, i + 1, j + 1, i + 1);
-			_adjacencyList[_VertexIndex(i, j)].push_back({ _VertexIndex(i + 1, j), ptr });
-			_adjacencyList[_VertexIndex(i + 1, j)].push_back({ _VertexIndex(i, j), ptr });
+			_edgesList[_VertexIndex(i, j)].push_back({ _VertexIndex(i + 1, j), ptr });
+			_edgesList[_VertexIndex(i + 1, j)].push_back({ _VertexIndex(i, j), ptr });
 		}
 	}
 }

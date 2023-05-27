@@ -18,8 +18,8 @@ MazeBase::MazeBase(int verticesNumber, int startVertex, int endVertex)
  */
 void MazeBase::InitialiseGraph()
 {
-	_adjacencyList.clear();
-	_adjacencyList.resize(_verticesNumber);
+	_edgesList.clear();
+	_edgesList.resize(_verticesNumber);
 }
 
 /**
@@ -28,7 +28,7 @@ void MazeBase::InitialiseGraph()
  */
 void MazeBase::GenerateMaze(SpanningtreeAlgorithmBase* algorithm)
 {
-	auto spanningTreeEdges = algorithm->SpanningTree(_verticesNumber, _adjacencyList);
+	auto spanningTreeEdges = algorithm->SpanningTree(_verticesNumber, _edgesList);
 
 	// Optionally, find find a solution of a maze based on Graph DFS.
 	_Solve(spanningTreeEdges);
@@ -46,13 +46,13 @@ void MazeBase::_Solve(const std::vector<std::pair<int, int>>& spanningTreeEdges)
 	for (const auto& [u, v] : spanningTreeEdges)
 	{
 		spanningTreeGraph[u].push_back(
-			*std::find_if(_adjacencyList[u].begin(), _adjacencyList[u].end(),
+			*std::find_if(_edgesList[u].begin(), _edgesList[u].end(),
 				[v = v](const Edge& e)
 				{
 					return std::get<0>(e) == v;
 				}));
 		spanningTreeGraph[v].push_back(
-			*std::find_if(_adjacencyList[v].begin(), _adjacencyList[v].end(),
+			*std::find_if(_edgesList[v].begin(), _edgesList[v].end(),
 				[u = u](const Edge& e)
 				{
 					return std::get<0>(e) == u;
@@ -84,14 +84,14 @@ void MazeBase::_RemoveBorders(const std::vector<std::pair<int, int>>& spanningTr
 {
 	for (const auto& [u, v] : spanningTreeEdges)
 	{
-		_adjacencyList[u].erase(
-			std::find_if(_adjacencyList[u].begin(), _adjacencyList[u].end(),
+		_edgesList[u].erase(
+			std::find_if(_edgesList[u].begin(), _edgesList[u].end(),
 				[v = v](const Edge& e)
 				{
 					return std::get<0>(e) == v;
 				}));
-		_adjacencyList[v].erase(
-			std::find_if(_adjacencyList[v].begin(), _adjacencyList[v].end(),
+		_edgesList[v].erase(
+			std::find_if(_edgesList[v].begin(), _edgesList[v].end(),
 				[u = u](const Edge& e)
 				{
 					return std::get<0>(e) == u;
@@ -104,7 +104,7 @@ void MazeBase::Draw(RenderWindow& window, Color& color) const
 {
 	for (int i = 0; i < _verticesNumber; ++i)
 	{
-		for (const auto& edge : _adjacencyList[i])
+		for (const auto& edge : _edgesList[i])
 		{
 			std::get<1>(edge)->Draw(window, color);
 		}
@@ -137,7 +137,7 @@ void MazeBase::PrintMazeSVG(const std::string& filename) const
 
 	for (int i = 0; i < _verticesNumber; ++i)
 	{
-		for (const auto& edge : _adjacencyList[i])
+		for (const auto& edge : _edgesList[i])
 		{
 			if (std::get<0>(edge) < i)
 			{
