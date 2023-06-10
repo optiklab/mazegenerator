@@ -2,12 +2,11 @@
 #define SPANNINGTREEALGORITHM_H
 
 #include "cellborder.h"
+#include "edge.h"
+#include "graph.h"
 #include <memory>
 #include <random>
 #include <vector>
-
-typedef std::tuple<int, std::shared_ptr<CellBorder>> Edge;
-typedef std::vector<std::vector<Edge>> Graph;
 
 /**
  * Perfect mazes are mazes with exactly one solution.

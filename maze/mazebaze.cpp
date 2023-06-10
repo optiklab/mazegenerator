@@ -42,6 +42,7 @@ void MazeBase::GenerateMaze(SpanningtreeAlgorithmBase* algorithm)
 void MazeBase::_Solve(const std::vector<std::pair<int, int>>& spanningTreeEdges)
 {
 	// Convert pairs of vertex numbers into actual edges, to run DFS on it.
+	// We should create 2 instances for every edge: one instance for FROM+Edge and one instance for TO+Edge.
 	Graph spanningTreeGraph(_verticesNumber);
 	for (const auto& [u, v] : spanningTreeEdges)
 	{
