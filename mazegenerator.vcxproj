@@ -215,6 +215,9 @@ COPY /y ".\dependencies\SFML-2.5.1-windows-vc15-64-bit\SFML-2.5.1\bin\sfml-syste
     <ClInclude Include="maze\rectangularmaze.h" />
     <ClInclude Include="maze\mazebase.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

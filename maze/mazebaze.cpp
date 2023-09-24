@@ -24,13 +24,13 @@ void MazeBase::InitialiseGraph()
 
 /**
  * \brief Generates entire maze spanning tree and adjusts maze graph representation accordingly.
- * \param algorithm Algorithm that is used to generate ,aze spanning tree.
+ * \param algorithm Algorithm that is used to generate maze spanning tree.
  */
 void MazeBase::GenerateMaze(SpanningtreeAlgorithmBase* algorithm)
 {
 	auto spanningTreeEdges = algorithm->SpanningTree(_verticesNumber, _edgesList);
 
-	// Optionally, find find a solution of a maze based on Graph DFS.
+	// Find a solution of a maze based on Graph DFS.
 	_Solve(spanningTreeEdges);
 	_RemoveBorders(spanningTreeEdges);
 }

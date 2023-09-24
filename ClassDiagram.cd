@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BreadthFirstSearch" Collapsed="true">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAQAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAEAAA=</HashCode>
+      <FileName>algorithms\breadthfirstsearch.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CellBorder" Collapsed="true">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>algorithms\cellborder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DepthFirstSearch" Collapsed="true">
+    <Position X="6.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAYAAAABACAAAAAAAAAAAA=</HashCode>
+      <FileName>algorithms\depthfirstsearch.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Kruskal" Collapsed="true">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAAQAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>algorithms\kruskal.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LineBorder" Collapsed="true">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAQAggAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>algorithms\lineborder.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoopErasedRandomWalk" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAQAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>algorithms\looperasedrandomwalk.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MazeBase" Collapsed="true">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BgAAACAACBACAgAAACAAAAAAAAAAIBAQAAAAAAAECAA=</HashCode>
+      <FileName>maze\mazebase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Prim" Collapsed="true">
+    <Position X="2.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>algorithms\prim.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RectangularMaze" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABCAAAAAAAAAAAAIABAAAAAQAAABAAAAAAA=</HashCode>
+      <FileName>maze\rectangularmaze.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpanningtreeAlgorithmBase" Collapsed="true">
+    <Position X="3.75" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAQIAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>algorithms\spanningtreealgorithmbase.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
